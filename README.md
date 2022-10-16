@@ -1,12 +1,16 @@
 # Bitcoin-Price-Monitor
 This is a Bitcoin Price Monitor written in Python. This is still a working project.
 
+This repo has been tested on
+* Windows 10, Python 3.10.4
+
 
 # Dependencies
 
-- numpy
-- matplotlib
-- requests
+- [numpy](https://numpy.org/)
+- [matplotlib](https://matplotlib.org/)
+- [requests](https://pypi.org/project/requests/)
+
 
 
 # Installation
@@ -21,6 +25,7 @@ $ cd <MAIN_DIRECTORY>
 
 # Usage
 
+To run the real-time figure and update price data,
 ```
 $ cd <MAIN_DIRECTORY>
 $ python3 example/run_Monitor.py

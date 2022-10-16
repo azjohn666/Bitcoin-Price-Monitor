@@ -12,15 +12,25 @@ from getPriceFromServer import getPriceFromServer
 
 
 class Monitor:
-    def __init__(self, timeInterval):
+    timeInterval: float  # the time interval [sec] for updating data
+
+    def __init__(self, timeInterval: float):
         """
-        Constructor:
+        Constructor: Initialize an instance of Monitor.
+
+        Input:
+            timeInterval: float, the time interval [sec] for updating data
         """
         self.timeInterval = timeInterval
 
     def run(self, coinName: str, currencyName: str, kindName: str):
         """
-        run:
+        run: run the real-time price monitor. This is the main function entry point.
+
+        Input:
+            coinName: str, the name of coin you're concerned
+            currencyName: str, the name of currency you're concerned
+            kindName: str, the name of the price type, "buy" or "sell"
         """
         count = 0
         self.createRealtimeFig()
@@ -28,10 +38,17 @@ class Monitor:
         while count < 10:
         # while True:
             asyncio.run(self.doOnce(coinName, currencyName, kindName))
+            # count = count + 1
+            count += 1
 
     async def doOnce(self, coinName: str, currencyName: str, kindName: str):
         """
-        doOnce:
+        doOnce: get the real-time price once, and the frequency is set to a certain value
+
+        Input:
+            coinName: str, the name of coin you're concerned
+            currencyName: str, the name of currency you're concerned
+            kindName: str, the name of the price type, "buy" or "sell"
         """
         t0 = time.time()
         self.updateRealtimeFig()
@@ -45,8 +62,9 @@ class Monitor:
 
     def createRealtimeFig(self):
         """
-        createRealtimeFig: 
+        createRealtimeFig: create a figure for real-time data visualization
         """
+        # initilize an empty figure
         _, self.ax = plt.subplots(1, 1, figsize=(12, 10))
         plt.ion()
         plt.show()
@@ -57,8 +75,9 @@ class Monitor:
 
     def updateRealtimeFig(self):
         """
-        updateRealtimeFig
+        updateRealtimeFig: update the current figure once
         """
+        # clear the current figure
         self.ax.clear()
         idxList = np.arange(self.priceList.shape[0])
         self.ax.plot(idxList, self.priceList, color="blue")
@@ -69,8 +88,9 @@ class Monitor:
 
     def figureSetting(self):
         """
-        figureSetting:
+        figureSetting: set up the figure for current axis
         """
+        # add labels on x and y axes of the figure
         self.ax.set_xlabel("time")
         self.ax.set_ylabel("Price [USD]")
         # set legends
